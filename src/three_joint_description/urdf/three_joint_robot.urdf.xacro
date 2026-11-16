@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="two_joint_robot">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="three_joint_robot">
 
   <xacro:arg name="controllers_file" default=""/>
 
@@ -9,6 +9,9 @@
   </material>
   <material name="orange">
     <color rgba="0.95 0.45 0.08 1.0"/>
+  </material>
+  <material name="green">
+    <color rgba="0.15 0.75 0.15 1.0"/>
   </material>
   <material name="dark">
     <color rgba="0.18 0.18 0.20 1.0"/>
@@ -119,11 +122,55 @@
     <dynamics damping="0.2" friction="0.05"/>
   </joint>
 
+
+
+
+  <!-- Link 3: Upper arm -->
+  <link name="link3">
+    <visual>
+      <origin xyz="0.20 0 0"/>
+      <geometry>
+        <box size="0.40 0.09 0.09"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+    <collision>
+      <origin xyz="0.20 0 0"/>
+      <geometry>
+        <box size="0.40 0.09 0.09"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.20 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.002" ixy="0" ixz="0"
+               iyy="0.014" iyz="0" izz="0.014"/>
+    </inertial>
+  </link>
+
+  <!-- Joint 3: Elbow rotation, tilted 15 degrees downward -->
+  <joint name="joint3" type="revolute">
+    <parent link="link2"/>
+    <child link="link3"/>
+
+<!-- Mounting position: 15 degrees downward around local Y -->
+  <origin xyz="0.40 0 0" rpy="0 0.261799 0"/>
+
+    <!-- Rotation axis -->
+    <axis xyz="0 1 0"/>
+
+    <limit lower="-1.57" upper="1.57"
+           effort="100.0" velocity="1.0"/>
+
+    <dynamics damping="0.2" friction="0.05"/>
+  </joint>
+
+
   <!-- End-effector reference frame at the physical end of link2 -->
   <link name="tool0"/>
 
-  <joint name="link2_to_tool0" type="fixed">
-    <parent link="link2"/>
+  <joint name="link3_to_tool0" type="fixed">
+    <parent link="link3"/>
     <child link="tool0"/>
     <origin xyz="0.40 0 0" rpy="0 0 0"/>
   </joint>
@@ -141,6 +188,12 @@
     </joint>
 
     <joint name="joint2">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="joint3">
       <command_interface name="position"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>

@@ -2,7 +2,7 @@ from setuptools import setup
 from glob import glob
 import os
 
-package_name = 'two_joint_bringup'
+package_name = 'three_joint_bringup'
 setup(
     name=package_name,
     version='0.0.1',
@@ -16,7 +16,7 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='Robot Team',
-    maintainer_email='maintainer@example.com',
-    description='Gazebo bringup for a two-joint robot',
+    maintainer_email='rithani@lgb.co.in',
+    description='Gazebo bringup for a three-joint robot',
     license='Apache-2.0',
 )

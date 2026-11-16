@@ -10,9 +10,9 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-    description_share = get_package_share_directory('two_joint_description')
-    bringup_share = get_package_share_directory('two_joint_bringup')
-    xacro_file = os.path.join(description_share, 'urdf', 'two_joint_robot.urdf.xacro')
+    description_share = get_package_share_directory('three_joint_description')
+    bringup_share = get_package_share_directory('three_joint_bringup')
+    xacro_file = os.path.join(description_share, 'urdf', 'three_joint_robot.urdf.xacro')
     controllers_file = os.path.join(bringup_share, 'config', 'controllers.yaml')
 
     robot_description = ParameterValue(
@@ -51,7 +51,7 @@ def generate_launch_description():
         executable='create',
         arguments=[
             '-topic', 'robot_description',
-            '-name', 'two_joint_robot'
+            '-name', 'three_joint_robot'
         ],
         output='screen'
     )

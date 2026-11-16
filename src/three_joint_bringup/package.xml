@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>two_joint_bringup</name>
+  <name>three_joint_bringup</name>
   <version>0.0.1</version>
-  <description>Gazebo and ros2_control bringup for the two-joint robot.</description>
-  <maintainer email="maintainer@example.com">Robot Team</maintainer>
+  <description>Gazebo and ros2_control bringup for the three-joint robot.</description>
+  <maintainer email="rithani@lgb.co.in">Robot Team</maintainer>
   <license>Apache-2.0</license>
   <buildtool_depend>ament_python</buildtool_depend>
   <exec_depend>ament_index_python</exec_depend>
@@ -16,7 +16,7 @@
   <exec_depend>ros2_control</exec_depend>
   <exec_depend>ros2_controllers</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>two_joint_description</exec_depend>
+  <exec_depend>three_joint_description</exec_depend>
 
   <export>
     <build_type>ament_python</build_type>

@@ -7,20 +7,20 @@ from moveit_configs_utils import MoveItConfigsBuilder
 
 
 def generate_launch_description():
-    description_share = get_package_share_directory('two_joint_description')
-    config_share = get_package_share_directory('two_joint_moveit_config')
-    bringup_share = get_package_share_directory('two_joint_bringup')
+    description_share = get_package_share_directory('three_joint_description')
+    config_share = get_package_share_directory('three_joint_moveit_config')
+    bringup_share = get_package_share_directory('three_joint_bringup')
 
-    xacro_file = os.path.join(description_share, 'urdf', 'two_joint_robot.urdf.xacro')
+    xacro_file = os.path.join(description_share, 'urdf', 'three_joint_robot.urdf.xacro')
     controllers_file = os.path.join(bringup_share, 'config', 'controllers.yaml')
 
     moveit_config = (
-        MoveItConfigsBuilder('two_joint_robot', package_name='two_joint_moveit_config')
+        MoveItConfigsBuilder('three_joint_robot', package_name='three_joint_moveit_config')
         .robot_description(
             file_path=xacro_file,
             mappings={'controllers_file': controllers_file}
         )
-        .robot_description_semantic(file_path=os.path.join(config_share, 'config', 'two_joint_robot.srdf'))
+        .robot_description_semantic(file_path=os.path.join(config_share, 'config', 'three_joint_robot.srdf'))
         .robot_description_kinematics(file_path=os.path.join(config_share, 'config', 'kinematics.yaml'))
         .joint_limits(file_path=os.path.join(config_share, 'config', 'joint_limits.yaml'))
         .trajectory_execution(file_path=os.path.join(config_share, 'config', 'moveit_controllers.yaml'))
