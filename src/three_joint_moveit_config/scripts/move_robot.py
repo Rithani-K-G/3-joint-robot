@@ -114,12 +114,23 @@ def main():
 
         # Ask MoveIt to calculate the required joint positions
         # using inverse kinematics and plan a trajectory.
+ #       trajectory = moveit.plan(
+  #          position=[x, y, z],
+   #         frame_id=BASE_LINK,
+    #        target_link=END_EFFECTOR_LINK,
+     #       tolerance_position=0.005,
+      #      timeout_sec=30.0,
+       # ) 
+
         trajectory = moveit.plan(
-            position=(x, y, z),
-            frame_id=BASE_LINK,
-            target_link=END_EFFECTOR_LINK,
+            joint_positions=[
+                math.radians(35.54),
+                math.radians(0.12),
+                math.radians(40.94)
+            ],
+            joint_names=JOINT_NAMES,
             timeout_sec=30.0,
-        )
+        )    
 
         if trajectory is None:
 

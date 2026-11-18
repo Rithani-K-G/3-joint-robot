@@ -8,6 +8,25 @@
     <joint name="joint2" value="0.0"/>
     <joint name="joint3" value="0.0"/>  
   </group_state>
-  <disable_collisions link1="base_link" link2="link1" reason="Adjacent"/>
-  <disable_collisions link1="link1" link2="link2" link3="link3" reason="Adjacent"/>
+  <!-- Disable collisions between adjacent links -->
+
+  <disable_collisions
+      link1="base_link"
+      link2="link1"
+      reason="Adjacent"/>
+
+  <disable_collisions
+      link1="link1"
+      link2="link2"
+      reason="Adjacent"/>
+
+  <disable_collisions
+      link1="link2"
+      link2="link3"
+      reason="Adjacent"/>
+
+  <disable_collisions
+      link1="link3"
+      link2="tool0"
+      reason="Adjacent"/>
 </robot>
