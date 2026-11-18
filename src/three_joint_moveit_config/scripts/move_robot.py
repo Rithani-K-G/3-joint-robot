@@ -108,6 +108,15 @@ def main():
 
         spin_thread.start()
 
+        if not moveit.wait_for_joint_state(timeout_sec=5.0):
+            raise RuntimeError(
+                "No joint states received. Check joint_state_broadcaster."
+            )
+
+        node.get_logger().info(
+            "Received current joint states. Ready to plan."
+        )
+
         node.get_logger().info(
             f"Planning XYZ target: ({x:.3f}, {y:.3f}, {z:.3f})"
         )
@@ -133,6 +142,28 @@ def main():
             return 2
 
         print("\nMoveIt found a trajectory.")
+
+        print("\nPlanned trajectory joint positions:")
+
+        print("Joint order:", trajectory.joint_names)
+
+        if trajectory.points:
+
+            print("\nStarting positions:")
+
+            for name, position in zip(
+                trajectory.joint_names,
+                trajectory.points[0].positions
+            ):
+                print(f"  {name}: {math.degrees(position):.2f} degrees")
+
+    print("\nFinal positions:")
+
+    for name, position in zip(
+        trajectory.joint_names,
+        trajectory.points[-1].positions
+    ):
+        print(f"  {name}: {math.degrees(position):.2f} degrees")
 
         answer = input(
             "Execute the trajectory? [y/N]: "
